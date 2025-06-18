@@ -10,7 +10,7 @@ const noteRoutes = require("./routes/note-routes");
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// 🔹 Connect to MongoDB
+// 🔹 Connecting to MongoDB
 connectToMongoDB(process.env.MONGO_URL);
 
 // 🔹 Middlewares
