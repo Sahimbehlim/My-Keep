@@ -29,7 +29,7 @@ const Header = () => {
   const handleSignOut = () => {
     Cookies.remove("authToken");
     setToken(null);
-    window.location.href = "/login"; // Redirect to login page after logout
+    // window.location.href = "/login";
   };
 
   // Close dropdown when clicking outside
