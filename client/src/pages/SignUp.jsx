@@ -2,8 +2,11 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import InputBox from "../components/Auth/InputBox";
+import { useUser } from "../context/userContext";
 
 const SignUp = () => {
+  const { backendURL } = useUser();
+
   const [registerInfo, setRegisterInfo] = useState({
     name: "",
     email: "",
@@ -26,7 +29,7 @@ const SignUp = () => {
     setError(null);
 
     try {
-      await axios.post("http://localhost:3000/api/user/register", registerInfo);
+      await axios.post(`${backendURL}/api/user/register`, registerInfo);
       navigate("/login");
     } catch (error) {
       console.error("Error registering user", error);

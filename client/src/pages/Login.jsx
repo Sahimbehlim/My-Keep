@@ -10,7 +10,7 @@ const Login = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const { setToken } = useUser();
+  const { setToken, backendURL } = useUser();
   const navigate = useNavigate();
 
   const handleChanges = (e) => {
@@ -25,7 +25,7 @@ const Login = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:3000/api/user/login",
+        `${backendURL}/api/user/login`,
         loginInfo
       );
       const { token } = response.data;

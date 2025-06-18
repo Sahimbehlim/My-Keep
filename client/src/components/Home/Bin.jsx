@@ -6,7 +6,7 @@ import { useNotes } from "../../context/noteContext";
 import { useUser } from "../../context/userContext";
 
 const Bin = () => {
-  const { token } = useUser();
+  const { token, backendURL } = useUser();
   const { notes, setNotes } = useNotes();
 
   const emptyBinHandler = async () => {
@@ -17,7 +17,7 @@ const Bin = () => {
     if (!confirmDelete) return;
 
     try {
-      await axios.delete("http://localhost:3000/api/notes/bin/empty", {
+      await axios.delete(`${backendURL}/api/notes/bin/empty`, {
         headers: { Authorization: `Bearer ${token}` },
       });
 

@@ -8,6 +8,7 @@ const UserContext = createContext({
 
 export const UserProvider = ({ children }) => {
   const [token, setToken] = useState(Cookies.get("authToken") || null);
+  const backendURL = import.meta.env.VITE_BACKEND_URL;
 
   useEffect(() => {
     if (token) {
@@ -18,7 +19,7 @@ export const UserProvider = ({ children }) => {
   }, [token]);
 
   return (
-    <UserContext.Provider value={{ token, setToken }}>
+    <UserContext.Provider value={{ token, setToken, backendURL }}>
       {children}
     </UserContext.Provider>
   );

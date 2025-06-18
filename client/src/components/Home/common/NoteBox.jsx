@@ -15,7 +15,7 @@ const NoteBox = () => {
     isPinned: false,
   });
 
-  const { token } = useUser();
+  const { token, backendURL } = useUser();
   const { setNotes, editedNote, setEditedNote } = useNotes();
   const noteBoxRef = useRef(null);
 
@@ -64,8 +64,8 @@ const NoteBox = () => {
 
     try {
       const url = editedNote
-        ? `http://localhost:3000/api/notes/${editedNote._id}`
-        : "http://localhost:3000/api/notes";
+        ? `${backendURL}/api/notes/${editedNote._id}`
+        : `${backendURL}/api/notes`;
 
       const method = editedNote ? "patch" : "post";
       const { data } = await axios[method](url, formData, {

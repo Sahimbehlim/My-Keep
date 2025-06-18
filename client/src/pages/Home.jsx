@@ -12,14 +12,14 @@ const Home = () => {
   const [isOpenSideBar, setIsOpenSideBar] = useState(false);
   const [editedNote, setEditedNote] = useState(null);
   const [loggedInUser, setLoggedInUser] = useState(null);
-  const { token } = useUser();
+  const { token, backendURL } = useUser();
 
   useEffect(() => {
     if (!token) return;
 
     const getAllNotes = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/api/notes", {
+        const response = await axios.get(`${backendURL}/api/notes`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         const { allNotes, userInfo } = response.data;

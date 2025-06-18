@@ -12,7 +12,7 @@ import { useUser } from "../../../context/userContext";
 
 const SingleNote = ({ note }) => {
   const [isHover, setIsHover] = useState(false);
-  const { token } = useUser();
+  const { token, backendURL } = useUser();
   const { setNotes, setEditedNote } = useNotes();
 
   const toastTheme = {
@@ -25,7 +25,7 @@ const SingleNote = ({ note }) => {
   const toggleNoteStatus = async (name, status) => {
     try {
       const response = await axios.patch(
-        `http://localhost:3000/api/notes/${note._id}/toggle-status`,
+        `${backendURL}/api/notes/${note._id}/toggle-status`,
         { status, name },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -52,7 +52,7 @@ const SingleNote = ({ note }) => {
     if (!window.confirm("Delete note forever?")) return;
 
     try {
-      await axios.delete(`http://localhost:3000/api/notes/${note._id}`, {
+      await axios.delete(`${backendURL}/api/notes/${note._id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setNotes((prevNotes) => prevNotes.filter((n) => n._id !== note._id));
